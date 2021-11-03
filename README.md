@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+#  Interaction of two APIs React-Rails, Frontend-Backend #
+Works together with [Rails API]( https://github.com/HarshBarash/Rails_API_wReact_API )
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+#  Clone the repository, run #
 
-In the project directory, you can run:
+```javascript
+$ npm run start
+```
 
-### `yarn start`
+## Navigate to http://localhost:3000/: ##
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Set up the App* #
+(If you create it yourself)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```javascript
 
-### `yarn test`
+$ npx create-react-app frontend-api
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+$ cd frontend-api/
 
-### `yarn build`
+$ yarn add http-proxy-middleware
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## In /src, create a file called setupProxy.js ##
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
 
-### `yarn eject`
+const { createProxyMiddleware } = require('http-proxy-middleware');
+module.exports = function(app) {
+    app.use(
+        '/api',
+        createProxyMiddleware({
+            target: 'http://localhost:3001',
+            changeOrigin: true,
+        })
+    );
+};
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+npm run start
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
 
-## Learn More
+## Navigate to http://localhost:3000/: ##
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+*Don't forget to follow the instructions for the [Rails API]( https://github.com/HarshBarash/Rails_API_wReact_API ) as well
 
-### Code Splitting
+*If you have similar "create-react-app is not working since version 4.0.1" problems, follow the instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+Uninstall create-react-app v4.0.1:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. 
+```javascript
 
-### Making a Progressive Web App
+# for npm:
+npm uninstall -g create-react-app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# for yarn:
+yarn global remove create-react-app
 
-### Advanced Configuration
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+2. 
+```javascript
 
-### Deployment
+# for npm:
+npm i create-react-app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# for yarn:
+yarn add create-react-app
 
-### `yarn build` fails to minify
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3.
+```javascript
+
+# for npx:
+npx create-react-app my-app
+
+# for npm:
+npm init react-app my-app
+
+# for yarn:
+yarn create react-app my-app
+
+```
+
+*If it didn't solve the [ problem ]( https://stackoverflow.com/questions/64963796/create-react-app-is-not-working-since-version-4-0-1 )
+
+
